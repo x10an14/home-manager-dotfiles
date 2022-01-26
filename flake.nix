@@ -2,10 +2,11 @@
   description = "Nix Flake for x10an14's non-NixOS nix settings.";
 
   inputs = {
-    nixpkgs.url = "flake:nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     homeManager = {
-      url = "github:nix-community/home-manager";
+      # See `nix registry list` for `flake:X` aliases
+      url = "flake:home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
