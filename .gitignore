@@ -1,2 +1,5 @@
 # (n)vim
 *.swp
+
+# Nix outputs
+result
