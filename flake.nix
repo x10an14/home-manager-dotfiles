@@ -29,7 +29,7 @@
         # Allow reference/installation of unstable packages with `pkgs.unstable.<package>`
         configuration = {config, pkgs, ...}: let
           overlay-unstable = final: prev: {
-            unstable = nixpkgs-unstable.legacyPackages.x86-64-linux;
+            unstable = nixpkgs-unstable.legacyPackages.x86_64-linux;
           };
         in {
           nixpkgs = {
