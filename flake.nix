@@ -34,15 +34,23 @@
             unstable = nixpkgs-stable.legacyPackages."${system}";
           };
         in {
+          hostname = "bits-laptop";
           nixpkgs = {
             # Complete the implementation of `pkgs.unstable.<package>`
             overlays = [ overlay-stable ];
             config.allowUnfree = true;
           };
 
-          # Home-manager settings independent from system
           imports = [
+            ./config-options/default.nix
+            ./alacritty.nix
+            ./bash.nix
+            ./git.nix
+            ./gpg-agent.nix
             ./home.nix
+            ./passwordstore.nix
+            ./sway/default.nix
+            ./machine-configs/default.nix
           ];
         };
       };
