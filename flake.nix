@@ -2,8 +2,8 @@
   description = "Nix Flake for x10an14's non-NixOS nix settings.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "flake:nixpkgs";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-unstable";
     homeManager = {
       # See `nix registry list` for `flake:X` aliases
       url = "flake:home-manager";
@@ -14,7 +14,7 @@
   outputs = {
     self
     , nixpkgs
-    , nixpkgs-unstable
+    , nixpkgs-stable
     , homeManager
     , ...
   }: let
@@ -30,13 +30,13 @@
 
         # Allow reference/installation of unstable packages with `pkgs.unstable.<package>`
         configuration = {config, pkgs, ...}: let
-          overlay-unstable = final: prev: {
-            unstable = nixpkgs-unstable.legacyPackages."${system}";
+          overlay-stable = final: prev: {
+            unstable = nixpkgs-stable.legacyPackages."${system}";
           };
         in {
           nixpkgs = {
             # Complete the implementation of `pkgs.unstable.<package>`
-            overlays = [ overlay-unstable ];
+            overlays = [ overlay-stable ];
             config.allowUnfree = true;
           };
 
